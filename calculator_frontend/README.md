@@ -1,82 +1,48 @@
-# Lightweight React Template for KAVIA
+# Ocean Professional Calculator (React)
 
-This project provides a minimal React template with a clean, modern UI and minimal dependencies.
+Modern, minimalist calculator UI with keyboard and click input. Styled using the Ocean Professional theme.
 
 ## Features
 
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
+- Basic operations: add, subtract, multiply, divide
+- Keyboard input: 0-9, ., +, -, *, /, Enter(=), Backspace, C (clear entry), Esc (all clear)
+- Edge cases handled:
+  - Prevent multiple decimals
+  - Prevent awkward leading zeros
+  - Division by zero: shows error "Cannot divide by zero" until cleared
+- Accessible buttons with aria labels and focus rings
+- Responsive layout with subtle gradients, rounded corners, and shadows
 
-## Getting Started
+## Quick start
 
-In the project directory, you can run:
+1. Install dependencies
+   ```
+   npm install
+   ```
 
-### `npm start`
+2. Start the dev server (defaults to port 3000; your environment may map to a different port)
+   ```
+   npm start
+   ```
 
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+3. Open http://localhost:3000
 
-### `npm test`
+## Code Structure
 
-Launches the test runner in interactive watch mode.
+- `src/components/Calculator.jsx` – state and logic, keyboard handling
+- `src/components/Display.jsx` – previous expression + main value
+- `src/components/Keypad.jsx` – buttons layout
+- `src/components/Button.jsx` – accessible button
+- `src/theme.js` – theme constants and helpers
+- `src/index.css` – global styles and Ocean theme variables
+- `src/App.js` – mounts the Calculator inside a centered shell
 
-### `npm run build`
+## Minimal sanity check
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+A very small sanity check runs in `Calculator.jsx` to ensure a simple operation (2 + 3 = 5).
+For comprehensive verification consider adding React Testing Library tests.
 
-## Customization
+## Notes
 
-### Colors
-
-The main brand colors are defined as CSS variables in `src/App.css`:
-
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
-```
-
-### Components
-
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
-
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
-
-## Learn More
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Avoids `eval`. Arithmetic is implemented via a small pure function `calculateBinary(a, op, b)`.
+- The equals button is disabled during error state (division by zero) until cleared.
